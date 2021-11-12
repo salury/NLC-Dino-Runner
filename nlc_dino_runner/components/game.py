@@ -31,10 +31,11 @@ class Game:
 
     def score(self):
         self.points += 1
-        if self.points % 20 == 0:
+        if self.points % 100 == 0:
             self.game_speed += 1
         score_element, score_element_rec = nlc_dino_runner.utils.text.get_score_element(self.points)
         self.screen.blit(score_element, score_element_rec)
+        self.player.check_invisibilidad(self.screen)
 
     def show_menu(self):
         white_color = (255, 255, 255)
@@ -59,7 +60,7 @@ class Game:
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
-                pass
+                self.run()
 
     def run(self):
         self.points = 0
@@ -71,7 +72,6 @@ class Game:
             self.draw()
 
     def execute(self):
-        self.running = True
         while self.running:
             if not self.playing:
                 self.show_menu()
@@ -93,6 +93,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.score()
+        self.power_up_manager.draw(self.scren)
+
         pygame.display.update()
         pygame.display.flip()
 
