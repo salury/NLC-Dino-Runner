@@ -2,6 +2,7 @@ import pygame
 
 import nlc_dino_runner
 from nlc_dino_runner.components.dinosaur import Dinosaur
+from nlc_dino_runner.components.heart import Heart
 from nlc_dino_runner.components.obstaculos.obstacle_manage import ObstacleManager
 from nlc_dino_runner.utils import text
 from nlc_dino_runner.utils.constants import (
@@ -28,6 +29,7 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.points = 0
+        self.heart = Heart()
 
     def score(self):
         self.points += 1
@@ -93,8 +95,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.score()
-        self.power_up_manager.draw(self.scren)
-
+        self.power_up_manager.draw(self.screen)
+        self.heart.draw(self, screen)
         pygame.display.update()
         pygame.display.flip()
 
