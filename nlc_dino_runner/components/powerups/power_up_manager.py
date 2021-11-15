@@ -1,6 +1,6 @@
 import random
 import pygame
-from nlc_dino_runner.components.power_up.shield import Shield
+from nlc_dino_runner.components.powerups.shield import Shield
 
 
 class PowerUpManager:
@@ -9,6 +9,7 @@ class PowerUpManager:
         self.when_appears = 0
         self.points = 0
         self.option_numbers = list(range(1, 10))
+
     def reset_power_ups(self, points):
         self.power_ups = []
         self.points = points
@@ -28,7 +29,7 @@ class PowerUpManager:
         for power_up in self.power_ups:
             power_up.update(game_speed, self.power_ups)
             if player.dino_rect.colliderect(power_up.rect):
-                power_up.start_time = pygame.time.get_ticks ()
+                power_up.start_time = pygame.time.get_ticks()
                 player.shield = True
                 player.show_text = True
                 player.type = power_up.type
@@ -36,6 +37,7 @@ class PowerUpManager:
                 time_random = random.randrange(5, 8)
                 player.shield_time_up = power_up.start_time + (time_random * 1000)
                 self.power_ups.remove(power_up)
+
     def draw(self, screen):
         for power_up in self.power_ups:
             power_up.draw(screen)

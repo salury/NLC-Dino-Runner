@@ -1,6 +1,6 @@
 import pygame
 from nlc_dino_runner.utils.constants import RUNNING, DUCKING, JUMPING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, \
-    JUMPING_SHIELD, RUNNING_SHIELD, FONT_STYLE
+    JUMPING_SHIELD, RUNNING_SHIELD, FONT_STYLE, BLACK_COLOR
 from pygame.sprite import Sprite
 
 
@@ -8,10 +8,10 @@ class Dinosaur(Sprite):
     X_POS = 80
     Y_POS = 320
     Y_POS_DUCK = 340
-    JUMP_VEL = 8.5
+    JUMP_VEL = 10
 
     def __init__(self):
-        self.image = RUNNING[0]
+        #self.image = RUNNING[0]
         self.run_img = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
         self.duck_img = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
         self.jump_img = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD}
@@ -79,10 +79,11 @@ class Dinosaur(Sprite):
         self.step_index += 1
 
     def jump(self):
-        self.image = JUMPING
+        #self.image = JUMPING
+        self.image = self.jump_img[self.type]
         if self.dino_jump:
             self.dino_rect.y -= self.jump_vel * 4
-            self.jump_vel -= 0.8
+            self.jump_vel -= 1
         if self.jump_vel < -self.JUMP_VEL:
             self.dino_rect.y = self.Y_POS
             self.dino_jump = False
@@ -90,13 +91,13 @@ class Dinosaur(Sprite):
 
     def check_invisibilidad(self, screen):
         if self.shield:
-            time_to_show = round((self.shield.time_up - pygame.time.get_ticks())/1000, 2)
+            time_to_show = round((self.shield_time_up - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0:
                 if self.show_text:
                     font = pygame.font.Font(FONT_STYLE, 15)
-                    text = font.render("f´shield enable for ", {time_to_show}, True, self.black_color)
+                    text = font.render(f"Shield enable for: {time_to_show}", True, BLACK_COLOR)
                     text_rect = text.get_rect()
-                    text_rect.center = (500, 50)
+                    text_rect.center = (800, 50)
                     screen.blit(text, text_rect)
                 else:
                     self.shield = False
@@ -105,6 +106,3 @@ class Dinosaur(Sprite):
     def update_type_to_default(self, current_type):
         if self.type == current_type:
             self.type = DEFAULT_TYPE
-
-
-

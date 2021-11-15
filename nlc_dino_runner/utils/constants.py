@@ -73,4 +73,4 @@ ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 FONT_STYLE = "freesansbold.ttf"
-black_color = (0, 0, 0)
+BLACK_COLOR = (0, 0, 0)

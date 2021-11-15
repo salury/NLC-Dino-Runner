@@ -1,4 +1,4 @@
-import pygame
+import pygame.time
 from nlc_dino_runner.components.obstaculos.cactus import Cactus
 from nlc_dino_runner.utils.constants import SMALL_CACTUS
 
@@ -13,12 +13,12 @@ class ObstacleManager:
             self.obstacles.append(Cactus(SMALL_CACTUS))
 
         for obstacle in self.obstacles:
-            obstacle.update(game.game_speed, self.obstacles)
+            obstacle.update(self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                if game.player_shield:
-                    self.obstacles.remowe(obstacle)
+                if game.player.shield:
+                    self.obstacles.remove(obstacle)
                 else:
-                    pygame.time.delay(500)
+                    pygame.time.delay(1000)
                     game.playing = False
                     game.death_count += 1
                     break
