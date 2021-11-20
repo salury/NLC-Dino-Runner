@@ -74,3 +74,8 @@ DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 FONT_STYLE = "freesansbold.ttf"
 BLACK_COLOR = (0, 0, 0)
+HEART_COUNT = 4
+
+FPS = 30
+
+HAMMER_TYPE = "Hammer loading"

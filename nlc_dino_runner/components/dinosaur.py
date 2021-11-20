@@ -1,7 +1,8 @@
 import pygame
-from nlc_dino_runner.utils.constants import RUNNING, DUCKING, JUMPING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, \
-    JUMPING_SHIELD, RUNNING_SHIELD, FONT_STYLE, BLACK_COLOR
 from pygame.sprite import Sprite
+
+from nlc_dino_runner.utils.constants import DEFAULT_TYPE, SHIELD_TYPE, RUNNING_SHIELD, DUCKING_SHIELD, RUNNING, DUCKING, \
+    JUMPING, JUMPING_SHIELD, BLACK_COLOR, FONT_STYLE
 
 
 class Dinosaur(Sprite):

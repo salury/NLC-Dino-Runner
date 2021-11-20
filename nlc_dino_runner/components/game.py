@@ -1,41 +1,37 @@
 import pygame
+
 from nlc_dino_runner.components.dinosaur import Dinosaur
 from nlc_dino_runner.components.obstaculos.obstacle_manager import ObstacleManager
 from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
-from nlc_dino_runner.utils import text_utils
-from nlc_dino_runner.utils.constants import (
-    TITTLE,
-    ICON,
-    SCREEN_HEIGHT,
-    SCREEN_WIDTH,
-    BG,
-    FPS
-)
+from nlc_dino_runner.utils.constants import TITTLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS
+from nlc_dino_runner.components.powerups.heart import PlayerHeartManager
+from nlc_dino_runner.utils.text_utils import get_centered_message, get_score_element
 
 
 class Game:
     def __init__(self):
         pygame.init()
         self.playing = False
-        self.running = False
+        self.running = True
         pygame.display.set_caption(TITTLE)
         pygame.display.set_icon(ICON)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.x_pos_bg = 0
         self.y_pos_bg = 400
-        self.game_speed = 20
+        self.game_speed = 15
         self.clock = pygame.time.Clock()
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
         self.points = 0
         self.death_count = 0
+        self.player_heart_manager = PlayerHeartManager()
 
     def score(self):
         self.points += 1
         if self.points % 20 == 0:
-            self.game_speed += 1
-        score_element, score_element_rec = text_utils.get_score_element(self.points)
+            self.game_speed += 3
+        score_element, score_element_rec = get_score_element(self.points)
         self.screen.blit(score_element, score_element_rec)
         self.player.check_invisibilidad(self.screen)
 
@@ -50,14 +46,14 @@ class Game:
         half_width = SCREEN_WIDTH // 2
         half_height = SCREEN_HEIGHT // 2
         if self.death_count == 0:
-            text_element, text_element_rec = text_utils.get_centered_message('Press any key to start')
+            text_element, text_element_rec = get_centered_message('Press any key to start')
             self.screen.blit(text_element, text_element_rec)
         else:
-            text_element, text_element_rec = text_utils.get_centered_message("Press any key to restart")
+            text_element, text_element_rec = get_centered_message("Press any key to restart")
             self.screen.blit(text_element, text_element_rec)
 
         if self.death_count != 0:
-            text_element, text_element_rec = text_utils.get_centered_message("Death count: " + str(self.death_count), height=half_height + 50)
+            text_element, text_element_rec = get_centered_message("Death count: " + str(self.death_count), height=half_height + 50)
             self.screen.blit(text_element, text_element_rec)
         self.screen.blit(ICON, (half_width - 40, half_height - 200))
 

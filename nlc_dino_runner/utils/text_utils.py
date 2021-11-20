@@ -1,6 +1,5 @@
 import pygame
-from nlc_dino_runner.utils.constants import (SCREEN_WIDTH, SCREEN_HEIGHT, FONT_STYLE, BLACK_COLOR)
-
+from nlc_dino_runner.utils.constants import FONT_STYLE, BLACK_COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
 
 def get_score_element(points):
     font = pygame.font.Font(FONT_STYLE, 22)

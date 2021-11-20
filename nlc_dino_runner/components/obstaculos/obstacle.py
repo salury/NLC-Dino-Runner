@@ -1,13 +1,14 @@
 from nlc_dino_runner.utils.constants import SCREEN_WIDTH
 from pygame.sprite import Sprite
 
+
 class Obstacle(Sprite):
     def __init__(self, image, index):
         self.image = image
         self.index = index
         self.rect = self.image[self.index].get_rect()
         self.rect.x = SCREEN_WIDTH
-        self.game_speed = 15
+        self.game_speed = 10
         self.time = 0
 
     def update(self, obstacles):
